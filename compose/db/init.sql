@@ -1,0 +1,9 @@
+CREATE TABLE IF NOT EXISTS JOB(
+    id UUID NOT NULL,
+    description VARCHAR(1000),
+    company VARCHAR(255),
+    skills VARCHAR(255),
+    salary INT NOT NULL DEFAULT 0,
+    is_remote BOOLEAN NOT NULL DEFAULT false,
+    CONSTRAINT JOB_PK PRIMARY KEY(id)
+);
