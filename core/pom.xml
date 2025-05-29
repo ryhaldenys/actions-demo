@@ -19,6 +19,13 @@
         <kafka-schema-registry-client.version>7.3.4</kafka-schema-registry-client.version>
     </properties>
 
+    <repositories>
+        <repository>
+            <id>confluent</id>
+            <url>https://packages.confluent.io/maven/</url>
+        </repository>
+    </repositories>
+
     <dependencies>
         <dependency>
             <groupId>org.springframework.cloud</groupId>
