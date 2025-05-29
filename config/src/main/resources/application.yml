@@ -1,0 +1,59 @@
+spring:
+  application:
+    name: job-service
+  datasource:
+    url: jdbc:postgresql://localhost:5432/JOBS
+    username: root
+    password: root
+#    driver-class-name: org.postgresql.Driver
+  jpa:
+    show-sql: true
+    generate-ddl: false
+    open-in-view: false
+  docker:
+    compose:
+      enabled: true
+      file: ../compose/docker-compose.yml
+      skip:
+        in-tests: false
+  cloud:
+    function:
+      definition: "jobs"
+    stream:
+      kafka:
+        binder:
+          brokers:
+            - localhost:9092
+          producer-properties:
+            key.serializer: org.apache.kafka.common.serialization.IntegerSerializer
+#            value.serializer: io.confluent.kafka.serializers.KafkaAvroSerializer
+          consumer-properties:
+            key.deserializer: org.apache.kafka.common.serialization.IntegerDeserializer
+      #            value.deserializer: io.confluent.kafka.serializers.KafkaAvroDeserializer
+            specific.avro.reader: true
+#          configuration:
+#            schema.registry.url: http://localhost:8081
+        bindings:
+          jobs-in-0:
+            consumer:
+              enable-dlq: true
+              dlq-name: jobs-dlq
+              start-offset: latest
+      schema-registry-client:
+        endpoint: http://localhost:8081
+      bindings:
+        jobs-in-0:
+          destination: jobs-topic
+          content-type: application/*+avro
+          group: job-service
+          consumer:
+            max-attempts: 3
+        jobs-out-0:
+          destination: jobs-topic
+          content-type: application/*+avro
+
+logging:
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss} - %msg%n"
+  level:
+    root: INFO
