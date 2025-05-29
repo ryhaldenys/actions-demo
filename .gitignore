@@ -1,0 +1,56 @@
+# -----------------------------------
+# Java build artifacts
+# -----------------------------------
+*.class
+*.jar
+*.war
+*.ear
+
+# -----------------------------------
+# Maven / Gradle
+# -----------------------------------
+target/
+build/
+out/
+!gradle/wrapper/gradle-wrapper.jar
+.gradle/
+*.log
+
+# -----------------------------------
+# IDEs
+# IntelliJ IDEA
+# -----------------------------------
+.idea/
+*.iml
+*.ipr
+*.iws
+
+# Default ignored files
+/shelf/
+/workspace.xml
+# Editor-based HTTP Client requests
+/httpRequests/
+# Datasource local storage ignored files
+/dataSources/
+/dataSources.local.xml
+
+# -----------------------------------
+# Logs / Temp files
+# -----------------------------------
+*.tmp
+*.bak
+
+# -----------------------------------
+# Test reports
+# -----------------------------------
+test-output/
+surefire-reports/
+jacoco.exec
+
+# -----------------------------------
+# Environment / Secrets (optional)
+# -----------------------------------
+.env
+.env.local
+*.keystore
+*.pem
