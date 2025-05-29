@@ -15,7 +15,7 @@
     <properties>
         <spring-cloud-stream-binder-kafka.version>4.2.0</spring-cloud-stream-binder-kafka.version>
         <spring-cloud-stream-schema-registry-client.version>4.2.0</spring-cloud-stream-schema-registry-client.version>
-        <kafka-avro-serializer.version>7.3.4</kafka-avro-serializer.version>
+        <kafka-avro-serializer.version>7.9.1</kafka-avro-serializer.version>
         <kafka-schema-registry-client.version>7.3.4</kafka-schema-registry-client.version>
     </properties>
 

@@ -13,5 +13,5 @@ jobs:
           java-version: '17'
           cache: 'maven'
       - name: Run unit and integration test
-        run: mvn verify
+        run: mvn clean verify
 
