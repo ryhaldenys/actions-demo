@@ -1,0 +1,33 @@
+name: Test project
+on: push
+jobs:
+  test:
+    name: Run Unit/IT tests
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get code
+        uses: actions/checkout@v3  # Action allows us to download action
+      - name: Install java
+        uses: actions/setup-java@v4 # Set up java
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+          cache: 'maven'
+      - name: Run unit and integration test
+        run: mvn clean verify
+  deploy:
+    name: Deploy                    # deploy simulation
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get code
+        uses: actions/checkout@v3   # Action allows us to download action
+      - name: Install java
+        uses: actions/setup-java@v4 # Set up java
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+          cache: 'maven'
+      - name: Build project
+        run: mvn clean install -DskipTests
+      - name: Deploy
+        run: echo 'Deploying application'
