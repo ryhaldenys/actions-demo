@@ -20,5 +20,4 @@ public interface EntityMapper {
     @Mapping(target = "isRemote", expression = "java(job.isRemote())")
     com.job.messages.Job toMessageFromDto(JobDto job);
 
-
 }

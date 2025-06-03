@@ -41,7 +41,8 @@ class JobServiceImplTest {
         // Arrange
         JobDto jobDto = new JobDto();
         Page<JobDto> jobDtoPage = new PageImpl<>(Collections.singletonList(jobDto));
-        when(jobRepository.findAll(any(PageRequest.class))).thenReturn(new PageImpl<>(Collections.singletonList(new Job())));
+        when(jobRepository.findAll(any(PageRequest.class)))
+                .thenReturn(new PageImpl<>(Collections.singletonList(new Job())));
         when(entityMapper.toDto(any())).thenReturn(jobDto);
 
         // Act
@@ -59,7 +60,8 @@ class JobServiceImplTest {
         String skills = "Java";
         JobDto jobDto = new JobDto();
         Page<JobDto> jobDtoPage = new PageImpl<>(Collections.singletonList(jobDto));
-        when(jobRepository.findBySkillsLike(eq(skills), any(PageRequest.class))).thenReturn(new PageImpl<>(Collections.singletonList(new Job())));
+        when(jobRepository.findBySkillsLike(eq(skills), any(PageRequest.class)))
+                .thenReturn(new PageImpl<>(Collections.singletonList(new Job())));
         when(entityMapper.toDto(any())).thenReturn(jobDto);
 
         // Act
@@ -75,7 +77,8 @@ class JobServiceImplTest {
     void testSave() {
         // Arrange
         com.job.messages.Job job = new com.job.messages.Job();
-        when(entityMapper.toEntityFromMessage(any(com.job.messages.Job.class))).thenReturn(new com.jobservice.entity.Job());
+        when(entityMapper.toEntityFromMessage(any(com.job.messages.Job.class)))
+                .thenReturn(new com.jobservice.entity.Job());
 
         // Act
         jobService.save(job);

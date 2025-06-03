@@ -22,4 +22,3 @@ public class JobsConsumer implements Consumer<Message<Job>> {
         jobService.save(job.getPayload());
     }
 }
-

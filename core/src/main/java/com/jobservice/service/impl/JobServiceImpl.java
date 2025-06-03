@@ -17,13 +17,11 @@ public class JobServiceImpl implements JobService {
     private final EntityMapper entityMapper;
 
     public Page<JobDto> getAllJobs() {
-        return jobRepository.findAll(PageRequest.ofSize(Integer.MAX_VALUE))
-                .map(entityMapper::toDto);
+        return jobRepository.findAll(PageRequest.ofSize(Integer.MAX_VALUE)).map(entityMapper::toDto);
     }
 
     public Page<JobDto> getAllJobsBySkills(String skills) {
-        return jobRepository.findBySkillsLike(skills, PageRequest.ofSize(Integer.MAX_VALUE))
-                .map(entityMapper::toDto);
+        return jobRepository.findBySkillsLike(skills, PageRequest.ofSize(Integer.MAX_VALUE)).map(entityMapper::toDto);
     }
 
     public void save(Job jobDto) {

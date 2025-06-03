@@ -9,11 +9,12 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 
 @Configuration
 @EnableScheduling
-//@EnableSchemaRegistryClient
+// @EnableSchemaRegistryClient
 public class Config {
 
     @Bean
-    public SchemaRegistryClient schemaRegistryClient(@Value("${spring.cloud.stream.schema-registry-client.endpoint}") String endpoint) {
+    public SchemaRegistryClient schemaRegistryClient(
+            @Value("${spring.cloud.stream.schema-registry-client.endpoint}") String endpoint) {
         ConfluentSchemaRegistryClient client = new ConfluentSchemaRegistryClient();
         client.setEndpoint(endpoint);
         return client;

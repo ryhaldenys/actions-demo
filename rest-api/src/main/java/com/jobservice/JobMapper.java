@@ -7,9 +7,9 @@ import org.mapstruct.Mapping;
 
 @Mapper(componentModel = "spring")
 public interface JobMapper {
-        @Mapping(target = "remote", expression = "java(jobDTO.getIsRemote())")
-        JobDto toDto(JobDTO jobDTO);
+    @Mapping(target = "remote", expression = "java(jobDTO.getIsRemote())")
+    JobDto toDto(JobDTO jobDTO);
 
-        @Mapping(target = "isRemote", expression = "java(jobDto.isRemote())")
-        JobDTO toDTO(JobDto jobDto);
+    @Mapping(target = "isRemote", expression = "java(jobDto.isRemote())")
+    JobDTO toDTO(JobDto jobDto);
 }

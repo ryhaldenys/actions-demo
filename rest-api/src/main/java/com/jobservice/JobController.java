@@ -20,22 +20,16 @@ public class JobController implements JobApi {
 
     @Override
     public void createJob(JobDTO jobDTO) {
-         jobProducer.produceJobMessage(jobMapper.toDto(jobDTO));
+        jobProducer.produceJobMessage(jobMapper.toDto(jobDTO));
     }
 
     @Override
     public List<JobDTO> getAllJobs() {
-        return jobService.getAllJobs()
-                .get()
-                .map(jobMapper::toDTO)
-                .toList();
+        return jobService.getAllJobs().get().map(jobMapper::toDTO).toList();
     }
 
     @Override
     public List<JobDTO> searchJobs(String skills) {
-        return jobService.getAllJobsBySkills(skills)
-                .get()
-                .map(jobMapper::toDTO)
-                .toList();
+        return jobService.getAllJobsBySkills(skills).get().map(jobMapper::toDTO).toList();
     }
 }

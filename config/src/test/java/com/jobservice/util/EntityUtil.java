@@ -5,7 +5,7 @@ import lombok.experimental.UtilityClass;
 
 @UtilityClass
 public class EntityUtil {
-    public static Job getJob(){
+    public static Job getJob() {
         var job = new Job();
         job.setCompany("company");
         job.setSkills("java");

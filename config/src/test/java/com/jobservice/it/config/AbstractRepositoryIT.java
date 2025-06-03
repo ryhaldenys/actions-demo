@@ -16,17 +16,15 @@ public abstract class AbstractRepositoryIT {
 
     @Container
     private static final GenericContainer<?> container = new GenericContainer<>("postgres")
-            .withEnv("POSTGRES_USER", "root")
-            .withEnv("POSTGRES_PASSWORD", "root")
-            .withEnv("POSTGRES_DB", "JOBS")
+            .withEnv("POSTGRES_USER", "root").withEnv("POSTGRES_PASSWORD", "root").withEnv("POSTGRES_DB", "JOBS")
             .withExposedPorts(DB_PORT)
             .withClasspathResourceMapping("test-compose/db/init.sql", INIT_FILE, BindMode.READ_ONLY)
             .waitingFor(Wait.forListeningPort());
 
-
     @DynamicPropertySource
     static void doProperties(DynamicPropertyRegistry registry) {
         container.start();
-        registry.add("spring.datasource.url", ()-> String.format(DB_URL_FORMAT, container.getHost(), container.getMappedPort(DB_PORT)));
+        registry.add("spring.datasource.url",
+                () -> String.format(DB_URL_FORMAT, container.getHost(), container.getMappedPort(DB_PORT)));
     }
 }
