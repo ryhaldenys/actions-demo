@@ -31,6 +31,7 @@ jobs:
 
       - name: Build and analyze
         env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         run: |
           mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar \
@@ -38,4 +39,6 @@ jobs:
           -Dsonar.host.url=https://sonarcloud.io \
           -Dsonar.organization=ryhaldenys \
           -Dsonar.projectKey=ryhaldenys_actions-demo \
+          -Dsonar.projectName="${{github.event.repository.name}}" \
+          -Dsonar.projectVersion="${{github.event.repository.name}}" \
           -Dsonar.coverage.jacoco.xmlReportPaths="${{ github.workspace }}/jacoco-report/target/site/jacoco-aggregate/jacoco.xml"
