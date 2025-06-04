@@ -1,0 +1,45 @@
+name: Sonar run
+on:
+  push:
+  pull_request:
+    types: [synchronize, reopened, opened]
+jobs:
+  sonar:
+    name: Sonar run
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download source
+        uses: actions/checkout@v4
+      - name: Cache Sonar
+        uses: actions/cache@v3
+        with:
+          path: '~/.sonar/cache'
+          key: ${{runner.os}}-sonar
+      - name: Cache dependencies
+        uses: actions/cache@v3
+        with:
+          path: '~/m2/repository'
+          key: ${{runner.os}}-maven-${{hashFiles('**/pom.xml')}}
+          restore-keys: ${{runner.os}}-maven-
+      - name: Set up java
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: 17
+      - name: Run
+        run: |
+          echo "Working dir is ${{ github.workspace }}"
+      - name: Run 2
+        run: |
+          echo "Working dir is $GITHUB_WORKSPACE
+      - name: Run sonar
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        run: |
+          mvn clean verify org.sonarsource.scanner.maven:sonar-maven-plugin:3.9.1.2184:sonar \
+          -DskipITs \
+          -Dsonar.projectKey="${{github.event.repository.name}}" \
+          -Dsonar.organization=ryhaldenys \
+          -Dsonar.host.url=https://sonarcloud.io \
+          -Dsonar.login=$SONAR_TOKEN \
+          -Dsonar.coverage.jacoco.xmlReportPaths="$GITHUB_WORKSPACE/jacoco-report/target/site/jacoco-aggregate/jacoco.xml"

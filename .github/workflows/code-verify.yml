@@ -28,7 +28,7 @@ jobs:
           distribution: 'temurin'
           java-version: 17
           cache: 'maven'
-      - name: Run units
+      - name: Run tests
         run: mvn clean verify
   deployment:
     name: Deploy application
