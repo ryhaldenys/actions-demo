@@ -1,0 +1,75 @@
+openapi: 3.0.4
+info:
+  title: Swagger JobService - OpenAPI 3.0
+  version: 1.0.12
+tags:
+  - name: Job
+    description: Job controller
+paths:
+  /jobs:
+    get:
+      tags:
+        - Job
+      operationId: getAllJobs
+      responses:
+        '200':
+          description: Ok
+          content:
+            application/json:
+              schema:
+                type: array
+                title: JobResponse
+                items:
+                  $ref: '#/components/schemas/Job'
+    post:
+      tags:
+        - Job
+      operationId: createJob
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Job'
+      responses:
+        '202':
+          description: Accepted
+
+  /jobs/search:
+    get:
+      tags:
+        - Job
+      operationId: searchJobs
+      summary: searchJobs
+      parameters:
+        - name: skills
+          in: query
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Ok
+          content:
+            application/json:
+              schema:
+                type: array
+                title: JobResponse
+                items:
+                  $ref: '#/components/schemas/Job'
+components:
+  schemas:
+    Job:
+      type: object
+      properties:
+        id:
+          type: string
+          nullable: false
+        description:
+          type: string
+        company:
+          type: string
+        skills:
+          type: string
+        salary:
+          type: integer
+        isRemote:
+          type: boolean

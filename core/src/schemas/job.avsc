@@ -1,0 +1,13 @@
+{
+  "namespace": "com.job.messages",
+  "name": "Job",
+  "type": "record",
+  "fields": [
+    { "name": "id", "type": "string" },
+    { "name": "description", "type": "string" },
+    { "name": "company", "type": "string" },
+    { "name": "skills", "type": "string" },
+    { "name": "salary", "type": "int"},
+    { "name": "isRemote", "type": "boolean"}
+  ]
+}
