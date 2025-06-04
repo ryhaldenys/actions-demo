@@ -1,0 +1,47 @@
+name: Verify code
+on: [push, workflow_dispatch]
+jobs:
+  lint:
+    name: Lint code
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download source
+        uses: actions/checkout@v3
+      - name: Set up java
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: 17
+          cache: 'maven'
+      - name: Lint code
+        run: mvn formatter:validate
+  tests:
+    needs: lint
+    name: Run tests
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download source
+        uses: actions/checkout@v3
+      - name: Set up java
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: 17
+          cache: 'maven'
+      - name: Run units
+        run: mvn clean verify
+  deployment:
+    name: Deploy application
+    runs-on: ubuntu-latest
+    needs: [ lint, tests ]
+    steps:
+      - name: Download source
+        uses: actions/checkout@v3
+      - name: Set up java
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: 17
+          cache: 'maven'
+      - name: Deploy application
+        run: echo "Application is deployed"

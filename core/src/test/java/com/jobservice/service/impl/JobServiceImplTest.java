@@ -4,11 +4,11 @@ import com.jobservice.dto.JobDto;
 import com.jobservice.entity.Job;
 import com.jobservice.mapper.EntityMapper;
 import com.jobservice.repository.JobRepository;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
+import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
@@ -18,8 +18,11 @@ import java.util.Collections;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
+@ExtendWith(MockitoExtension.class)
 class JobServiceImplTest {
 
     @Mock
@@ -31,14 +34,9 @@ class JobServiceImplTest {
     @InjectMocks
     private JobServiceImpl jobService;
 
-    @BeforeEach
-    void setUp() {
-        MockitoAnnotations.openMocks(this);
-    }
 
     @Test
     void testGetAllJobs() {
-        // Arrange
         JobDto jobDto = new JobDto();
         Page<JobDto> jobDtoPage = new PageImpl<>(Collections.singletonList(jobDto));
         when(jobRepository.findAll(any(PageRequest.class)))
