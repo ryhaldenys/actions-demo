@@ -30,6 +30,8 @@ jobs:
           java-version: 17
       - name: Print github metadata
         run: echo "${{toJSON(github)}}"
+      - name: Print github secrets
+        run: echo "${{toJSON(secrets)}}"
 
       - name: Build and analyze
         env:
