@@ -34,7 +34,6 @@ class JobServiceImplTest {
     @InjectMocks
     private JobServiceImpl jobService;
 
-
     @Test
     void testGetAllJobs() {
         JobDto jobDto = new JobDto();
