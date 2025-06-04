@@ -40,5 +40,4 @@ jobs:
           -Dsonar.organization=ryhaldenys \
           -Dsonar.projectKey=ryhaldenys_actions-demo \
           -Dsonar.projectName="${{github.event.repository.name}}" \
-          -Dsonar.projectVersion="${{github.event.repository.name}}" \
-          -Dsonar.coverage.jacoco.xmlReportPaths="${{ github.workspace }}/jacoco-report/target/site/jacoco-aggregate/jacoco.xml"
+          -Dsonar.projectVersion="${{github.event.repository.name}}"
