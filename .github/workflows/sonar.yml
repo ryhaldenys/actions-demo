@@ -26,11 +26,15 @@ jobs:
         with:
           distribution: 'temurin'
           java-version: 17
+      - name: Print github metadata
+        run: echo "${{ github }}"
       - name: Build and analyze
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         run: |
           mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar \
           -DskipITs \
+          -Dsonar.host.url=https://sonarcloud.io
+          -Dsonar.organization=ryhaldenys
           -Dsonar.projectKey=ryhaldenys_actions-demo \
           -Dsonar.coverage.jacoco.xmlReportPaths="${{ github.workspace }}/jacoco-report/target/site/jacoco-aggregate/jacoco.xml"
