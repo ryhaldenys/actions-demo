@@ -26,12 +26,6 @@ jobs:
         with:
           distribution: 'temurin'
           java-version: 17
-      - name: Run
-        run: |
-          echo "Working dir is ${{ github.workspace }}"
-      - name: Run 2
-        run: |
-          echo "Working dir is $GITHUB_WORKSPACE
       - name: Run sonar
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
@@ -42,4 +36,4 @@ jobs:
           -Dsonar.organization=ryhaldenys \
           -Dsonar.host.url=https://sonarcloud.io \
           -Dsonar.login=$SONAR_TOKEN \
-          -Dsonar.coverage.jacoco.xmlReportPaths="$GITHUB_WORKSPACE/jacoco-report/target/site/jacoco-aggregate/jacoco.xml"
+          -Dsonar.coverage.jacoco.xmlReportPaths="${{ github.workspace }}/jacoco-report/target/site/jacoco-aggregate/jacoco.xml"
