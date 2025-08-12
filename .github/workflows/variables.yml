@@ -8,7 +8,40 @@ on:
   push:
 
 jobs:
+  test_expressions:
+    name: job to test expressions
+    runs-on: ubuntu-latest
+    env:
+      aBoolean: ${{ false }}
+      aNull: ${{ null }}
+      aNumber: ${{ 43 }}
+      aString: String value
+    steps:
+      - name: test null
+        if: (env.aNull == null)
+        run: echo this var is null
+
+      - name: test boolean
+        if: (env.aBoolean == 'false')
+        run: echo this var is false
+
+      - name: contains
+        if: ${{ contains(env.aString, 'value')}}
+        run: |
+          echo "our string contains: value"
+          echos "error command"
+
+      - name: test status check
+        if: ${{ failure() }}
+        env:
+          FORMAT_VAR: ${{ format('Git hub {0} {1} {2}','actions', 'is', 'awesome')}}
+        run: |
+          echo "this step runs a special scrip to clean up after failed one"
+          echo ${{ env.FORMAT_VAR }}
+  
+
   test_vaiables:
+    if: (github.event_name == 'pull_request')
     env:
       JOB_VAR: "Job level var"
 
@@ -26,6 +59,6 @@ jobs:
           echo $WF_VAR
           echo $JOB_VAR
           echo $STEP_VAR
-        
+          
           echo ${{ vars.CONF_VAR }}
           echo ${{ secrets.A_SECRET }}
