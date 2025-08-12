@@ -1,0 +1,40 @@
+name: jobs
+
+on:
+  push:
+
+jobs:
+  build-job:
+    outputs:
+      build-output: ${{ steps.buildStep.outputs.buildOutput}}
+    runs-on: ubuntu-latest
+    container:
+      image: oven/bun:slim
+    steps:
+      - name: define output
+        id: buildStep
+        run: |
+          bunver=$(bun --version)
+          echo "buildOutput=$bunver" >> "$GITHUB_OUTPUT"
+        # echo "buildOutput=$bunver" >> "$GITHUB_OUTPUT" - will create buildOutput var with a value of bunver and save it to GITHUB_OUTPUT file
+
+  cuncurrency-job1:
+    runs-on: ubuntu-latest
+    concurrency:
+      group: test
+    steps:
+      - run: sleep 15
+
+  cuncurrency-job2:
+    runs-on: ubuntu-latest
+    concurrency:
+      group: test
+    steps:
+      - run: sleep 15
+
+  deploy-job:
+    runs-on: ubuntu-latest
+    needs: build-job # depends on build-job
+    steps:
+      - name: test build output
+        run: echo ${{ needs.build-job.outputs.build-output }}

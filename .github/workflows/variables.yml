@@ -37,8 +37,8 @@ jobs:
           FORMAT_VAR: ${{ format('Git hub {0} {1} {2}','actions', 'is', 'awesome')}}
         run: |
           echo "this step runs a special scrip to clean up after failed one"
-          echo ${{ env.FORMAT_VAR }}
-  
+          echo ${{ env.FORMAT_VAR }}  
+          
 
   test_vaiables:
     if: (github.event_name == 'pull_request')
