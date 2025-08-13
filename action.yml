@@ -1,0 +1,25 @@
+name: composite
+description: calculator to test composite action
+inputs:
+  number1:
+    required: true
+    default: 0
+  number2:
+    required: true
+    default: 0
+
+outputs:
+  result:
+    value: ${{ steps.sum-result.output.result }}
+    description: result of calculation
+
+runs:
+  using: composite
+  steps:
+    - shell: bash
+      id: sum-result
+      run: |
+        num1=${{ inputs.number1 }}
+        num2=${{ inputs.number2 }}
+        result= $((num1 + num2))
+        echo "result=$result" >> "$GIHHUB_OUPUT"
