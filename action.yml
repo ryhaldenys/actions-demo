@@ -10,7 +10,7 @@ inputs:
 
 outputs:
   result:
-    value: ${{ steps.sum-result.output.result }}
+    value: ${{ steps.sum-result.outputs.result }}
     description: result of calculation
 
 runs:
