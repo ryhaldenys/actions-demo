@@ -6,7 +6,7 @@ on:
 jobs:
   build-job:
     outputs:
-      build-output: ${{ steps.buildStep.outputs.buildOutput}}
+      build-output: ${{ steps.buildStep.outputs.buildOutput }}
     runs-on: ubuntu-latest
     container:
       image: oven/bun:slim
