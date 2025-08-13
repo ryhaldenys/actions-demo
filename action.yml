@@ -22,4 +22,4 @@ runs:
         num1=${{ inputs.number1 }}
         num2=${{ inputs.number2 }}
         result=$((num1 + num2))
-        echo "result=$result" >> "$GIHHUB_OUPUT"
+        echo "result=$result" >> "$GIHHUB_OUTPUT"
