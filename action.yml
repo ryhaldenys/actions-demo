@@ -1,5 +1,5 @@
-name: composite
-description: calculator to test composite action
+name: containerAction
+description: containerAction
 inputs:
   number1:
     required: true
@@ -10,16 +10,11 @@ inputs:
 
 outputs:
   result:
-    value: ${{ steps.sum-result.outputs.result }}
-    description: result of calculation
+    description: 'output of sum of two values'
 
 runs:
-  using: composite
-  steps:
-    - shell: bash
-      id: sum-result
-      run: |
-        num1=${{ inputs.number1 }}
-        num2=${{ inputs.number2 }}
-        result=$((num1 + num2))
-        echo "result=$result" >> "$GITHUB_OUTPUT"
+  using: docker
+  image: 'Dockerfile'
+  args:
+    - ${{ inputs.number1 }}
+    - ${{ inputs.number2 }}
