@@ -12,14 +12,6 @@ check {
     dependsOn testCodeCoverageReport
 }
 
-sonar {
-    properties {
-        property("sonar.coverage.jacoco.xmlReportPaths",
-                layout.buildDirectory.file("reports/jacoco/testCodeCoverageReport/testCodeCoverageReport.xml").get().asFile.absolutePath
-        )
-    }
-}
-
 tasks.named('sonar') {
     dependsOn testCodeCoverageReport
 }
