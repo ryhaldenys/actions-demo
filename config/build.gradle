@@ -14,6 +14,10 @@ check {
 
 sonar {
     properties {
+        property "sonar.sources", "."
+        property "sonar.host.url", "https://sonarcloud.io"
+        property "sonar.organization", "ryhaldenys"
+        property "sonar.projectKey", "ryhaldenys_actions-demo"
         property "sonar.coverage.jacoco.xmlReportPath", "${layout.buildDirectory}/reports/jacoco/testCodeCoverageReport/testCodeCoverageReport.xml"
     }
 }
