@@ -1,9 +1,10 @@
 package ua.studying.service;
 
+import java.util.List;
 import ua.studying.vo.User;
 
-import java.util.List;
-
 public interface UserService {
-    List<User> getUsers();
+  List<User> getUsers();
+
+  List<User> getUsersByName(String name);
 }
