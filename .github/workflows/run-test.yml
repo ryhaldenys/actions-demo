@@ -29,17 +29,10 @@ jobs:
         run: ./gradlew spotlessCheck
       - name: Run tests
         run: ./gradlew test
-      - name: Run sonar check
+      - name: Run tests
+        run: ./gradlew testCodeCoverageReport
+      - name: SonarQube Scan
+        uses: sonarsource/sonarqube-scan-action@master
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-        run: |
-          ./gradlew sonar \
-            -Dsonar.sources=src \
-            -Dsonar.gradle.scanAll=true \
-            -Dsonar.host.url=https://sonarcloud.io \
-            -Dsonar.organization=ryhaldenys \
-            -Dsonar.projectKey=ryhaldenys_actions-demo \
-            -Dsonar.projectName=${{ github.event.repository.name }} \
-            -Dsonar.projectVersion=${{ github.event.repository.name }} \
-            -Dsonar.coverage.jacoco.xmlReportPaths=${{ github.workspace }}/config/build/reports/jacoco/testCodeCoverageReport/testCodeCoverageReport.xml
+          SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
