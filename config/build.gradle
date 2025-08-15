@@ -12,6 +12,9 @@ check {
     dependsOn testCodeCoverageReport
 }
 
-tasks.named('sonar') {
-    dependsOn testCodeCoverageReport
+sonar {
+    properties {
+        property "sonar.projectKey", "ryhaldenys_actions-demo"
+        property "sonar.organization", "ryhaldenys"
+    }
 }
