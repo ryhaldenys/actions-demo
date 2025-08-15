@@ -31,8 +31,15 @@ jobs:
         run: ./gradlew test
       - name: Run tests
         run: ./gradlew testCodeCoverageReport
-      - name: SonarQube Scan
+      - name: SonarCloud Scan
         uses: sonarsource/sonarqube-scan-action@master
+        with:
+          args: >
+            -Dsonar.projectKey=ryhaldenys_actions-demo
+            -Dsonar.organization=ryhaldenys
+            -Dsonar.host.url=https://sonarcloud.io
+            -Dsonar.login=${{ secrets.SONAR_TOKEN }}
+            -Dsonar.coverage.jacoco.xmlReportPaths=${{ github.workspace }}/config/build/reports/jacoco/testCodeCoverageReport/testCodeCoverageReport.xml
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
           SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
