@@ -1,0 +1,3 @@
+rootProject.name = 'studying-gradle-actions'
+
+include ':core', ':api', ':config'
