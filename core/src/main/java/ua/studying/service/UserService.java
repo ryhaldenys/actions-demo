@@ -5,4 +5,6 @@ import ua.studying.vo.User;
 
 public interface UserService {
   List<User> getUsers();
+
+  List<User> getUsersByName(String name);
 }
