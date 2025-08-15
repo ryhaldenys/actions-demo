@@ -27,6 +27,20 @@ subprojects {
     apply plugin: 'com.diffplug.spotless'
     apply plugin: 'jacoco'
 
+    configurations {
+        compileOnly {
+            extendsFrom annotationProcessor
+        }
+        testCompileOnly {
+            extendsFrom testAnnotationProcessor
+        }
+    }
+
+    bootJar {
+        archiveFileName.set("${rootProject.name}${version}.jar")
+        duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+    }
+
     spotless {
         java {
             googleJavaFormat()
@@ -56,20 +70,6 @@ subprojects {
             csv.required = false
             html.required = false
         }
-    }
-
-    configurations {
-        compileOnly {
-            extendsFrom annotationProcessor
-        }
-        testCompileOnly {
-            extendsFrom testAnnotationProcessor
-        }
-    }
-
-    bootJar {
-        archiveFileName.set("${rootProject.name}${version}.jar")
-        duplicatesStrategy = DuplicatesStrategy.EXCLUDE
     }
 
     dependencies {

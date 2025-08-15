@@ -1,5 +1,6 @@
 plugins{
     id 'jacoco-report-aggregation'
+    id 'org.sonarqube' version '6.2.0.5505'
 }
 
 dependencies {
@@ -8,5 +9,17 @@ dependencies {
 }
 
 check {
+    dependsOn testCodeCoverageReport
+}
+
+sonar {
+    properties {
+        property("sonar.coverage.jacoco.xmlReportPaths",
+                layout.buildDirectory.file("reports/jacoco/testCodeCoverageReport/testCodeCoverageReport.xml").get().asFile.absolutePath
+        )
+    }
+}
+
+tasks.named('sonar') {
     dependsOn testCodeCoverageReport
 }
