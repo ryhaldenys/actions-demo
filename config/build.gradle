@@ -1,4 +1,12 @@
+plugins{
+    id 'jacoco-report-aggregation'
+}
+
 dependencies {
     implementation project(':api')
     implementation project(':core')
+}
+
+check {
+    dependsOn testCodeCoverageReport
 }
