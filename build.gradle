@@ -40,6 +40,12 @@ subprojects {
     test {
         finalizedBy jacocoTestReport
         useJUnitPlatform()
+
+        testLogging {
+            events 'passed', 'skipped', 'failed'
+            showStandardStreams = true
+            exceptionFormat = 'short'
+        }
     }
 
     jacocoTestReport {
