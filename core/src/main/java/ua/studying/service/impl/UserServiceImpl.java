@@ -18,6 +18,11 @@ public class UserServiceImpl implements UserService {
     return users().stream().filter(u -> u.firstName().equals(name)).collect(Collectors.toList());
   }
 
+  @Override
+  public User getUserById(Integer id) {
+    return users().stream().filter(u -> u.id().equals(id)).findFirst().get();
+  }
+
   private static List<User> users() {
     return List.of(
         new User(1, "Den", "Han"),
