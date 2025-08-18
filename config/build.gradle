@@ -28,6 +28,7 @@ publishing {
             }
         }
     }
+
     publications {
         gpr(MavenPublication) {
             artifact(tasks.named("bootJar"))
