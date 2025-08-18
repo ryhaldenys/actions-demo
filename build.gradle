@@ -14,6 +14,8 @@ sonar {
         property 'sonar.organization', 'ryhaldenys'
         property 'sonar.host.url', 'https://sonarcloud.io'
         property "sonar.sourceEncoding", "UTF-8"
+        property "sonar.coverage.jacoco.xmlReportPaths", file("${projectDir}/config/build/reports/jacoco/testCodeCoverageReport/testCodeCoverageReport.xml")
+
     }
 }
 
@@ -80,14 +82,6 @@ subprojects {
             xml.required = true
             csv.required = false
             html.required = false
-        }
-    }
-
-    sonar {
-        properties {
-            property "sonar.sources", "src/main/java"
-            property "sonar.tests", "src/test/java"
-            property "sonar.java.binaries", sourceSets.main.output.classesDirs.asPath
         }
     }
 
