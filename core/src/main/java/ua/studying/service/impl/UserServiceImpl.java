@@ -20,7 +20,7 @@ public class UserServiceImpl implements UserService {
 
   @Override
   public User getUserById(Integer id) {
-    return users().stream().filter(u -> u.id().equals(id)).findFirst().get();
+    return users().stream().filter(u -> u.id().equals(id)).findFirst().orElseThrow();
   }
 
   private static List<User> users() {
