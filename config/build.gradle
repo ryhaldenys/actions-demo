@@ -16,3 +16,21 @@ bootJar {
     duplicatesStrategy = DuplicatesStrategy.EXCLUDE
     enabled = true
 }
+
+publishing {
+    repositories {
+        maven {
+            name = "GitHubPackages"
+            url = uri("https://maven.pkg.github.com/ryhaldenys/actions-demo")
+            credentials {
+                username = project.findProperty("gpr.user") ?: System.getenv("GITHUB_ACTOR")
+                password = project.findProperty("gpr.key") ?: System.getenv("GITHUB_TOKEN")
+            }
+        }
+    }
+    publications {
+        gpr(MavenPublication) {
+            artifact(tasks.named("bootJar"))
+        }
+    }
+}
