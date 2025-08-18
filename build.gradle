@@ -83,13 +83,6 @@ subprojects {
         }
     }
 
-    sonar {
-        properties {
-            property "sonar.sources", "src/main/java"
-            property "sonar.tests", "src/test/java"
-        }
-    }
-
     dependencies {
         implementation 'org.springframework.boot:spring-boot-starter'
 
