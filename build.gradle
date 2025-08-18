@@ -25,7 +25,7 @@ publishing {
         mavenCentral()
         maven {
             name = "GitHubPackages"
-            url = "https://maven.pkg.github.com"
+            url = "https://maven.pkg.github.com/ryhaldenys/actions-demo"
             credentials {
                 username = System.getenv("GITHUB_ACTOR")
                 password = System.getenv("GITHUB_TOKEN")
@@ -36,7 +36,7 @@ publishing {
 
 allprojects {
     group = 'ua.studying'
-    version = '1.0.2'
+    version = '1.0.3'
 
     repositories {
         mavenCentral()
